@@ -16,6 +16,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
             <a class="dropdown-item" href="{{ route('profile') }}" style="background-color: white; color:black;">{{ __('Profile') }}</a>
+            <a class="dropdown-item" href="{{ route('changePassword') }}" style="background-color: white; color:black;">{{ __('change password') }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ route('logout') }}"
             style="background-color: white; color:black;">

@@ -7,7 +7,19 @@
       <h3>{{ __('Log in to see how you can speed up your web development with out of the box CRUD for #User Management and more.') }} </h3>
     </div> -->
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-      <form class="form" method="POST" action="{{ route('login') }}">
+    @if (session('status_login'))
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                        </button>
+                        <span>{{ session('status_login') }}</span>
+                      </div>
+                    </div>
+                  </div>
+                @endif
+      <form class="form" method="POST" action="{{ route('postLogin') }}">
         @csrf
 
         <div class="card card-login card-hidden mb-3">
@@ -16,18 +28,18 @@
           </div>
           <div class="card-body">
             <p class="card-description text-center">{{ __('Sign in to  ') }} <strong>To access your </strong> {{ __(' account ') }}</p>
-            <div class="bmd-form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
+            <div class="bmd-form-group{{ $errors->has('username') ? ' has-danger' : '' }}">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="material-icons">email</i>
                   </span>
                 </div>
-                <input type="email" name="email" class="form-control" placeholder="{{ __('Email...') }}" value="{{ old('email') }}" required>
+                <input type="text" name="username" class="form-control" placeholder="{{ __('username...') }}" value="{{ old('username') }}" required>
               </div>
-              @if ($errors->has('email'))
+              @if ($errors->has('username'))
                 <div id="email-error" class="error text-danger pl-3" for="email" style="display: block;">
-                  <strong>{{ $errors->first('email') }}</strong>
+                  <strong>{{ $errors->first('username') }}</strong>
                 </div>
               @endif
             </div>
@@ -59,7 +71,7 @@
           <div class="row">
         <div class="col-6">
         @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}" class="btn btn-info btn-link btn-lg">
+                <a href="#" class="btn btn-info btn-link btn-lg">
                     <small style="color:black;">{{ __('Forgot password?') }}</small>
                 </a>
             @endif
