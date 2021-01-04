@@ -26,5 +26,28 @@ class HomeController extends Controller
         $role = $user->userRole(Auth::User()->role);
         return view('dashboard', compact('role'));
     }
-    
+    public function waiterHome()
+    {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
+        return view('waiterDashboard', compact('role'));
+    }
+    public function cashierHome()
+    {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
+        return view('cashierDashboard', compact('role'));
+    }
+    public function managerHome()
+    {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
+        return view('managerDashboard', compact('role'));
+    }
+    public function supervisorHome()
+    {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
+        return view('superVisorDashboard', compact('role'));
+    }
 }

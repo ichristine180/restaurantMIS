@@ -33,14 +33,14 @@ class ManagingDirector
             return redirect()->route('home');
         }
         if(in_array('Waiter',$userRoles)){
-            return redirect()->route('home'); 
+            return redirect()->route('waiterHome'); 
         }
         if(in_array('Supervisor',$userRoles)){
-            return redirect()->route('home');
+            return redirect()->route('supervisorHome');
         }
         if(in_array('Manager',$userRoles)){
-            return redirect()->route('home');
+            return redirect()->route('managerHome');
         }
-        return redirect()->route('home');
+        return redirect()->route('logout');
     }
 }

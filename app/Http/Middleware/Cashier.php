@@ -30,17 +30,17 @@ class Cashier
             return $next($request);
         }
         if(in_array('Waiter',$userRoles)){
-            return redirect()->route('home'); 
+            return redirect()->route('waiterHome'); 
         }
         if(in_array('Supervisor',$userRoles)){
-            return redirect()->route('home');
+            return redirect()->route('supervisorHome');
         }
         if(in_array('Manager',$userRoles)){
-            return redirect()->route('home');
+            return redirect()->route('managerHome');
         }
         if(in_array('Managing Director',$userRoles)){
             return redirect()->route('home');
         }
-        return redirect()->route('home');
+        return redirect()->route('logout');
     }
 }

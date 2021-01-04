@@ -30,18 +30,18 @@ class Supervisor
             return $next($request);
         }
         if(in_array('Manager',$userRoles)){
-            return redirect()->route('home');
+            return redirect()->route('managerHome');
         }
         if(in_array('Waiter',$userRoles)){
-            return redirect()->route('home');
+            return redirect()->route('waiterHome');
         }
         if(in_array('Cashier',$userRoles)){
-            return redirect()->route('home');
+            return redirect()->route('cashierHome');
         }
         if(in_array('Managing Director',$userRoles)){
             return redirect()->route('home');
         }
-        return redirect()->route('home');
+        return redirect()->route('logout');
     }
 
 }
