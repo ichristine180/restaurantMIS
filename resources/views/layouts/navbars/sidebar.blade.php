@@ -19,8 +19,8 @@
             <p>{{ __('Products Management') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('home') }}">
+      <li class="nav-item{{ $activePage == 'Employees' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('employees') }}">
           <i class="material-icons">explicit</i>
             <p>{{ __('Employees Management') }}</p>
         </a>

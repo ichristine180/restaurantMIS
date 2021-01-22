@@ -30,18 +30,18 @@ class Waiter
             return $next($request);
             
         }
-        if(in_array('Supervisor',$userRoles)){
-            return redirect()->route('supervisorHome');
+        if(in_array('Managing Director',$userRoles)){
+            return redirect()->route('home');
         }
         if(in_array('Manager',$userRoles)){
             return redirect()->route('managerHome');
         }
+        if(in_array('Supervisor',$userRoles)){
+            return redirect()->route('supervisorHome');
+        }
         if(in_array('Cashier',$userRoles)){
             return redirect()->route('cashierHome');
-        }
-        if(in_array('Managing Director',$userRoles)){
-            return redirect()->route('home');
-        }
+        }  
         return redirect()->route('logout');
     }
 }

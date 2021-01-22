@@ -31,5 +31,7 @@ Route::put('/postProfile', 'App\Http\Controllers\ProfileController@postProfile')
 Route::get('/changePassword', 'App\Http\Controllers\ProfileController@changePassword')->name('changePassword')->middleware('auth');
 Route::put('/postPassword', 'App\Http\Controllers\ProfileController@password')->name('postPassword')->middleware('auth');
 
+// managing drector routes
+Route::get('/employees','App\Http\Controllers\UserController@index')->name('employees')->middleware('auth');
 
 

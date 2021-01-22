@@ -29,17 +29,17 @@ class ManagingDirector
         if(in_array('Managing Director',$userRoles)){
             return $next($request);   
         }
-        if(in_array('Cashier',$userRoles)){
-            return redirect()->route('home');
-        }
-        if(in_array('Waiter',$userRoles)){
-            return redirect()->route('waiterHome'); 
+        if(in_array('Manager',$userRoles)){
+            return redirect()->route('managerHome');
         }
         if(in_array('Supervisor',$userRoles)){
             return redirect()->route('supervisorHome');
         }
-        if(in_array('Manager',$userRoles)){
-            return redirect()->route('managerHome');
+        if(in_array('Waiter',$userRoles)){
+            return redirect()->route('waiterHome'); 
+        }
+        if(in_array('Cashier',$userRoles)){
+            return redirect()->route('cashierHome');
         }
         return redirect()->route('logout');
     }
