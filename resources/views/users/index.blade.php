@@ -79,7 +79,7 @@
                         <td class="td-actions text-right">
                         @if( $user->userRole(Auth::User()->role) == 'Managing Director')
                        
-                                                        <a rel="tooltip" class="btn btn-success btn-link" href="#" data-original-title="" title="">
+                                                        <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('update',$user->id) }}" data-original-title="" title="">
                               <i class="material-icons">edit</i>
                               <div class="ripple-container"></div>
                             </a>
