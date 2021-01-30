@@ -6,6 +6,18 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
+      @if (session('status'))
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                        </button>
+                        <span>{{ session('status') }}</span>
+                      </div>
+                    </div>
+                  </div>
+                @endif
           <div class="card">
             <div class="card-header card-header-info">
               <h4 class="card-title" >Employees</h4>
@@ -14,7 +26,7 @@
             <div class="card-body">
                               <div class="row">
                 <div class="col-12 text-right">
-                  <a href="#" class="btn btn-sm btn-success">Add user</a>
+                  <a href="{{ route('register') }}" class="btn btn-sm btn-success">Add user</a>
                 </div>
               </div>
               <div class="table-responsive">

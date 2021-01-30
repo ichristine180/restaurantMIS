@@ -18,8 +18,8 @@ class UserController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        $users = User::first()->paginate(30);
+        $users = User::first()->paginate(5);
         return view('users.index', compact('users','role'))
-        ->with('i', (request()->input('page', 1) - 1) * 30);
+        ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 }

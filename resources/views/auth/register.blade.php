@@ -1,29 +1,28 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'register', 'title' => __('Material Dashboard')])
+@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'Employees', 'title' => __('Employees/register')])
 
 @section('content')
 <div class="container" style="height: auto;">
   <div class="row align-items-center">
-    <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-      <form class="form" method="POST" action="{{ route('register') }}">
+  <div class="col-md-8" style="margin-right:auto;margin-left:auto; margin-top:100px;">
+      <form class="form" method="POST" action="{{ route('postregister') }}">
         @csrf
-
-        <div class="card card-login card-hidden mb-3">
-          <div class="card-header card-header-primary text-center">
-            <h4 class="card-title"><strong>{{ __('Register') }}</strong></h4>
-            <div class="social-line">
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                <i class="fa fa-facebook-square"></i>
-              </a>
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                <i class="fa fa-twitter"></i>
-              </a>
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                <i class="fa fa-google-plus"></i>
-              </a>
-            </div>
+        @if (session('error'))
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                        </button>
+                        <span>{{ session('error') }}</span>
+                      </div>
+                    </div>
+                  </div>
+                @endif
+        <div class="card card-login card-hidden mb-1">
+          <div class="card-header card-header-info text-center">
+            <h4 class="card-title"><strong>{{ __('Register New Employee') }}</strong></h4>
           </div>
           <div class="card-body ">
-            <p class="card-description text-center">{{ __('Or Be Classical') }}</p>
             <div class="bmd-form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -54,49 +53,47 @@
                 </div>
               @endif
             </div>
-            <div class="bmd-form-group{{ $errors->has('password') ? ' has-danger' : '' }} mt-3">
+            <div class="bmd-form-group{{ $errors->has('username') ? ' has-danger' : '' }} mt-3">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-                    <i class="material-icons">lock_outline</i>
+                    <i class="material-icons">people</i>
                   </span>
                 </div>
-                <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password...') }}" required>
+                <input type="text" name="username" id="username" class="form-control" placeholder="{{ __('username...') }}" required>
               </div>
-              @if ($errors->has('password'))
+              @if ($errors->has('username'))
                 <div id="password-error" class="error text-danger pl-3" for="password" style="display: block;">
-                  <strong>{{ $errors->first('password') }}</strong>
+                  <strong>{{ $errors->first('username') }}</strong>
                 </div>
               @endif
             </div>
-            <div class="bmd-form-group{{ $errors->has('password_confirmation') ? ' has-danger' : '' }} mt-3">
+            <div class="bmd-form-group{{ $errors->has('role') ? ' has-danger' : '' }} mt-3">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-                    <i class="material-icons">lock_outline</i>
+                    <i class="material-icons">people</i>
                   </span>
                 </div>
-                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="{{ __('Confirm Password...') }}" required>
+                <select class="form-control" name="role">
+                    <option selected="selected" value="">Choose Role</option>
+                    @foreach($listofRoles as $listofRoles)
+                    <option value="{{$listofRoles->id}}">{{$listofRoles->name}}</option>
+                    @endforeach
+                  </select>
               </div>
-              @if ($errors->has('password_confirmation'))
-                <div id="password_confirmation-error" class="error text-danger pl-3" for="password_confirmation" style="display: block;">
-                  <strong>{{ $errors->first('password_confirmation') }}</strong>
+              @if ($errors->has('role'))
+                <div id="password-error" class="error text-danger pl-3" for="password" style="display: block;">
+                  <strong>{{ $errors->first('role') }}</strong>
                 </div>
               @endif
             </div>
-            <div class="form-check mr-auto ml-3 mt-3">
-              <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" id="policy" name="policy" {{ old('policy', 1) ? 'checked' : '' }} >
-                <span class="form-check-sign">
-                  <span class="check"></span>
-                </span>
-                {{ __('I agree with the ') }} <a href="#">{{ __('Privacy Policy') }}</a>
-              </label>
-            </div>
+            <div class="row">
+                <a  class="btn btn-default" href="{{ route('employees') }}" style="float:left; margin-left:30px;">{{ __('cancel') }}</a>
+                <button type="submit" class="btn btn-info" style="float:right; margin-left:auto;margin-right:30px;">{{ __('Save') }}</button>
+              </div>
           </div>
-          <div class="card-footer justify-content-center">
-            <button type="submit" class="btn btn-primary btn-link btn-lg">{{ __('Create account') }}</button>
-          </div>
+         
         </div>
       </form>
     </div>

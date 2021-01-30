@@ -33,5 +33,7 @@ Route::put('/postPassword', 'App\Http\Controllers\ProfileController@password')->
 
 // managing drector routes
 Route::get('/employees','App\Http\Controllers\UserController@index')->name('employees')->middleware('auth');
+Route::get('register','App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register')->middleware('auth');
+Route::post('postregister','App\Http\Controllers\Auth\RegisterController@registerEmployee')->name('postregister')->middleware('auth');
 
 
