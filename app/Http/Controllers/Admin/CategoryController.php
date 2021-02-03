@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Item;
 use App\Models\User;
 use Auth;
 use Illuminate\Support\Str;
@@ -64,9 +65,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function viewItem($id)
     {
         //
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
+        $category = Category::find($id);
+        $items = Item::where('category_id','=',$id)->paginate(5);
+        return view('admin.category.item',compact('items','role','category')) ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**

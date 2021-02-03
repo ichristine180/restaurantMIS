@@ -13,11 +13,29 @@
         </a>
       </li>
       @if($role === 'Managing Director' || $role === 'Manager' )
-      <li class="nav-item{{ $activePage == 'category' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('category') }}">
-          <i class="material-icons">free_breakfast</i>
-            <p>{{ __('Products Management') }}</p>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
+        <i class="material-icons">view_list</i>
+          <p>{{ __(' Products Management') }}
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse hide" id="laravelExample">
+          <ul class="nav">
+          <li class="nav-item {{ ($activePage == 'category') ? ' active' : '' }}">
+          <a class="nav-link" href="{{ route('category') }}">
+          <i class="material-icons">free_breakfast</i>
+            <p>{{ __('Categories') }}</p>
+        </a>
+        </li>
+        <li class="nav-item {{ ($activePage == 'item') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('items') }}">
+          <i class="material-icons">free_breakfast</i>
+            <p>{{ __('Items') }}</p>
+        </a>
+        </li>
+          </ul>
+        </div>
       </li>
       <li class="nav-item{{ $activePage == 'Employees' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('employees') }}">

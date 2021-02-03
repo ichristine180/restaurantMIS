@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'item', 'titlePage' => __('Dashboard')])
+@extends('layouts.app', ['activePage' => 'category', 'titlePage' => __('Dashboard')])
 
 @section ( 'title', 'Item')
 
@@ -13,16 +13,11 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    @include('layouts.msg')
-
+            <div class="col-md-8" style="margin-right:auto;margin-left:auto;">
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h4 class="card-title ">All Items</h4>
+                            <h4 class="card-title ">Items List in {{  $category->name }} Category</h4>
                         </div>
-                        <div class="col-12 text-right">
-                  <a href="{{ route('showIform') }}" class="btn btn-sm btn-success">Add New</a>
-                </div>
                             <div class="card-content table-responsive">
                                 <table id="table" class="table" cellspacing="0" width="100%">
                                     <thead class=" text-dark">
@@ -34,9 +29,6 @@
                                     </th>
                                     <th>
                                         Image
-                                    </th>
-                                    <th>
-                                        Category
                                     </th>
                                     <th>
                                         Price
@@ -58,15 +50,14 @@
                                             <td> {{  $item->name }}</td>
                                             <td> <img class="img-thumbnail img-responsive"
                                                       src="{{asset('uploads/item/'.$item->image)}}" style="height: 50px; width:70px" alt=""></td>
-                                            <td> {{  $item->category->name }}</td>
                                             <td> {{  $item->price }}</td>
                                             <td> {{  $item->description }}</td>
                                             <td> {{ $item->updated_at }}</td>
 
                                             <td>
-                                                <a href="{{ route('items',$item->id) }}" class="btn btn-info btn-sm"><i class="material-icons">mode_edit</i></a>
+                                                <a href="{{ route('item.edit',$item->id) }}" class="btn btn-info btn-sm"><i class="material-icons">mode_edit</i></a>
 
-                                                <form id="delete-form-{{ $item->id }}" action="{{ route('items',$item->id) }}" style="display: none;" method="POST">
+                                                <form id="delete-form-{{ $item->id }}" action="{{ route('item.destroy',$item->id) }}" style="display: none;" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>

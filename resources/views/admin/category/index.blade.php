@@ -66,7 +66,7 @@
                                                         }else {
                                                         event.preventDefault();
                                                         }"><i class="material-icons">delete</i></button>
-                                                        <a href="{{ route('category',$category->id) }}" class="btn btn-success btn-sm"><i class="material-icons md-48">visibility</i></a>
+                                                        <a href="{{ route('viewItem',$category->id) }}" class="btn btn-success btn-sm"><i class="material-icons md-48">visibility</i></a>
                                             </td>
 
 

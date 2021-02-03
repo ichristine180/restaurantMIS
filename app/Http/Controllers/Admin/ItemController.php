@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Item;
 use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\Support\Str;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,8 +20,10 @@ class ItemController extends Controller
      */
     public function index()
     {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
         $items = Item::all();
-        return view('admin.item.index',compact('items'));
+        return view('admin.item.index',compact('items','role'));
     }
 
     /**
@@ -28,8 +33,10 @@ class ItemController extends Controller
      */
     public function create()
     {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
         $categories = Category::all();
-        return view('admin.item.create',compact('categories'));
+        return view('admin.item.create',compact('categories','role'));
     }
 
     /**
@@ -48,7 +55,7 @@ class ItemController extends Controller
             'category' =>'required',
         ]);
         $image = $request->file('image');
-        $slug = str_slug($request->name);
+        $slug = Str::slug($request->name);
         if(isset($image)){
 
             $currentdate = Carbon::now()->toDateString();
@@ -70,7 +77,7 @@ class ItemController extends Controller
         $item->image = $imagename;
         $item->save();
 
-        return redirect()->route('item.index')->with('successMsg','Item Successfully Added');
+        return redirect()->route('items')->with('successMsg','Item Successfully Added');
 
 
 

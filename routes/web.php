@@ -46,3 +46,9 @@ Route::delete('/destroyUser/{id}','App\Http\Controllers\UserController@destroy')
  Route::delete('/destroy/{id}','App\Http\Controllers\Admin\CategoryController@destroy')->name('destroy')->middleware('auth');
  Route::put('/editcategory/{id}','App\Http\Controllers\Admin\CategoryController@update')->name('editcategory')->middleware('auth');
  Route::get('/showform/{id}','App\Http\Controllers\Admin\CategoryController@edit')->name('showform')->middleware('auth');
+ Route::get('/viewItem/{id}','App\Http\Controllers\Admin\CategoryController@viewItem')->name('viewItem')->middleware('auth');
+
+// product managements ---- items mgmt
+ Route::get('/items','App\Http\Controllers\Admin\ItemController@index')->name('items')->middleware('auth');
+ Route::post('/create','App\Http\Controllers\Admin\ItemController@store')->name('create')->middleware('auth');
+ Route::get('/showIform','App\Http\Controllers\Admin\ItemController@create')->name('showIform')->middleware('auth');
