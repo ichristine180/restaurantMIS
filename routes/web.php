@@ -32,9 +32,17 @@ Route::get('/changePassword', 'App\Http\Controllers\ProfileController@changePass
 Route::put('/postPassword', 'App\Http\Controllers\ProfileController@password')->name('postPassword')->middleware('auth');
 
 // managing drector routes
+//employee management
 Route::get('/employees','App\Http\Controllers\UserController@index')->name('employees')->middleware('auth');
 Route::get('register','App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register')->middleware('auth');
 Route::post('postregister','App\Http\Controllers\Auth\RegisterController@registerEmployee')->name('postregister')->middleware('auth');
 Route::get('/update/{id}','App\Http\Controllers\Auth\RegisterController@showEdit')->name('update')->middleware('auth');
 Route::post('/putUpdate','App\Http\Controllers\Auth\RegisterController@putUpdate')->name('putUpdate')->middleware('auth');
-
+Route::delete('/destroyUser/{id}','App\Http\Controllers\UserController@destroy')->name('destroyUser')->middleware('auth');
+// product managements ---- category mgmt
+ Route::get('/category','App\Http\Controllers\Admin\CategoryController@index')->name('category')->middleware('auth');
+ Route::get('/createcategory','App\Http\Controllers\Admin\CategoryController@create')->name('createcategory')->middleware('auth');
+ Route::post('/categorystore','App\Http\Controllers\Admin\CategoryController@store')->name('categorystore')->middleware('auth');
+ Route::delete('/destroy/{id}','App\Http\Controllers\Admin\CategoryController@destroy')->name('destroy')->middleware('auth');
+ Route::put('/editcategory/{id}','App\Http\Controllers\Admin\CategoryController@update')->name('editcategory')->middleware('auth');
+ Route::get('/showform/{id}','App\Http\Controllers\Admin\CategoryController@edit')->name('showform')->middleware('auth');

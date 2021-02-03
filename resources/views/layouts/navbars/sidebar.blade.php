@@ -13,8 +13,8 @@
         </a>
       </li>
       @if($role === 'Managing Director' || $role === 'Manager' )
-      <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('home') }}">
+      <li class="nav-item{{ $activePage == 'category' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('category') }}">
           <i class="material-icons">free_breakfast</i>
             <p>{{ __('Products Management') }}</p>
         </a>

@@ -22,4 +22,10 @@ class UserController extends Controller
         return view('users.index', compact('users','role'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->back()->with('successMsg','Successfully Deleted');
+    }
 }

@@ -18,6 +18,9 @@
                     </div>
                   </div>
                 @endif
+                <div class="col-12 text-left">
+                @include('layouts.msg')
+                </div>
           <div class="card">
             <div class="card-header card-header-info">
               <h4 class="card-title" >Employees</h4>
@@ -26,7 +29,7 @@
             <div class="card-body">
                               <div class="row">
                 <div class="col-12 text-right">
-                  <a href="{{ route('register') }}" class="btn btn-sm btn-success">Add user</a>
+                  <a href="{{ route('register') }}" class="btn btn-sm btn-success">Add Employee</a>
                 </div>
               </div>
               <div class="table-responsive">
@@ -84,8 +87,16 @@
                               <div class="ripple-container"></div>
                             </a>
                             @if($user->username!=Auth::User()->username)
-                            <a rel="tooltip" class="btn btn-danger btn-link" href="#" data-original-title="" title="">
-                              <i class="material-icons">delete</i>
+                            <form id="delete-form-{{ $user->id }}" action="{{ route('destroyUser',$user->id) }}" style="display: none;" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
+                                                        event.preventDefault();
+                                                        document.getElementById('delete-form-{{ $user->id }}').submit();
+                                                        }else {
+                                                        event.preventDefault();
+                                                        }"><i class="material-icons">delete</i></button>
                               <div class="ripple-container"></div>
                             </a>
                             @endif
@@ -96,10 +107,18 @@
 <i class="material-icons">edit</i>
 <div class="ripple-container"></div>
 </a>
-<a rel="tooltip" class="btn btn-danger btn-link" href="#" data-original-title="" title="">
-<i class="material-icons">delete</i>
-<div class="ripple-container"></div>
-</a>
+
+
+<form id="delete-form-{{ $user->id }}" action="{{ route('destroyUser',$user->id) }}" style="display: none;" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
+                                                        event.preventDefault();
+                                                        document.getElementById('delete-form-{{ $user->id }}').submit();
+                                                        }else {
+                                                        event.preventDefault();
+                                                        }"><i class="material-icons">delete</i></button>
 @endif
 @endif 
                                                     </td>
@@ -117,4 +136,16 @@
           </div>
             </div>
           @endsection
+          @push('scripts')
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('#table').DataTable();
+        } );
+    </script>
+
+
+    @endpush
