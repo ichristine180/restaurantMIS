@@ -39,6 +39,8 @@ Route::post('postregister','App\Http\Controllers\Auth\RegisterController@registe
 Route::get('/update/{id}','App\Http\Controllers\Auth\RegisterController@showEdit')->name('update')->middleware('auth');
 Route::post('/putUpdate','App\Http\Controllers\Auth\RegisterController@putUpdate')->name('putUpdate')->middleware('auth');
 Route::delete('/destroyUser/{id}','App\Http\Controllers\UserController@destroy')->name('destroyUser')->middleware('auth');
+Route::get('/addRole/{id}','App\Http\Controllers\Auth\RegisterController@addRole')->name('addRole')->middleware('auth');
+Route::post('/PostAddRole','App\Http\Controllers\Auth\RegisterController@PostAddRole')->name('PostAddRole')->middleware('auth');
 // product managements ---- category mgmt
  Route::get('/category','App\Http\Controllers\Admin\CategoryController@index')->name('category')->middleware('auth');
  Route::get('/createcategory','App\Http\Controllers\Admin\CategoryController@create')->name('createcategory')->middleware('auth');

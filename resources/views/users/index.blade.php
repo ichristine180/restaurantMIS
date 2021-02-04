@@ -87,7 +87,7 @@
                               <div class="ripple-container"></div>
                             </a>
                             @if($user->userRole($user->role) =='Managing Director' || $user->userRole($user->role) == 'Manager')
-                            <a rel="tooltip" class="btn btn-info btn-sm" href="{{ route('update',$user->id) }}" data-original-title="" title="">
+                            <a rel="tooltip" class="btn btn-info btn-sm" href="{{ route('addRole',$user->id) }}" data-original-title="" title="">
                               <i class="material-icons">add</i>
                               <div class="ripple-container"></div>
                             </a>

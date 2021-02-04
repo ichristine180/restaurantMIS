@@ -114,4 +114,43 @@ class RegisterController extends Controller
     }
     return back()->withError(__('oops! username or email is not available.'));
     }
+
+    public function addRole ($id)
+    {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
+        $user =User::find($id);
+        $exitRole = $user->userRole($user->role);
+        $listofRoles = '';
+        //  dd($exitRole);
+        if($exitRole == 'Managing Director'){
+        $listofRoles =DB::table('roles')->Where('name','!=','Managing Director')->Where('name','!=','Cashier')->get();
+        }
+        if($exitRole == 'Manager'){
+            $listofRoles =DB::table('roles')->Where('name','=','Waiter')->orWhere('name','=','Supervisor')->get();
+        }
+    // dd($listofRoles);
+        return view('users.addRole', compact('role','listofRoles','user'));
+    }
+
+    protected function PostAddRole(Request $request)
+    {
+        request()->validate([
+            'role' => ['required', 'string'],
+        ],
+            [
+            'role.required' =>'please select Role',
+        ]
+            );
+            $data = $request->all();
+       $checkRole = DB::table('role_user')->where('role_id','=',$data['role'])
+       ->where('user_id','=',$data['id'])->get();
+    //    dd( $checkRole->count());
+        if($checkRole->count() == 0){
+            $data1 = ['user_id'=>$data['id'],'role_id'=>$data['role']];
+            $role_user =  DB::table('role_user')->insert($data1);
+            return redirect('employees')->withStatus(__('role added successfully.'));
+        }
+        return back()->withError(__('oops! has already that role.'));
+    }
 }
