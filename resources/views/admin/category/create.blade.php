@@ -23,7 +23,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12">
-                                    <div class="bmd-form-group{{ $errors->has('username') ? ' has-danger' : '' }} mt-3">
+                                    <div class="bmd-form-group{{ $errors->has('name') ? ' has-danger' : '' }} mt-3">
                                     <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">

@@ -86,6 +86,12 @@
                               <i class="material-icons">edit</i>
                               <div class="ripple-container"></div>
                             </a>
+                            @if($user->userRole($user->role) =='Managing Director' || $user->userRole($user->role) == 'Manager')
+                            <a rel="tooltip" class="btn btn-info btn-sm" href="{{ route('update',$user->id) }}" data-original-title="" title="">
+                              <i class="material-icons">add</i>
+                              <div class="ripple-container"></div>
+                            </a>
+                            @endif
                             @if($user->username!=Auth::User()->username)
                             <form id="delete-form-{{ $user->id }}" action="{{ route('destroyUser',$user->id) }}" style="display: none;" method="POST">
                                                     @csrf
@@ -103,7 +109,7 @@
                             @endif
                             @if($user->userRole(Auth::User()->role) == 'Manager')
                             @if($user->userRole($user->role) !='Managing Director')
-                       <a rel="tooltip" class="btn btn-success btn-link" href="#" data-original-title="" title="">
+                            <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('update',$user->id) }}" data-original-title="" title="">
 <i class="material-icons">edit</i>
 <div class="ripple-container"></div>
 </a>

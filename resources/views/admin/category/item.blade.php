@@ -18,6 +18,9 @@
                         <div class="card-header card-header-info">
                             <h4 class="card-title ">Items List in {{  $category->name }} Category</h4>
                         </div>
+                        <div class="col-12 text-right">
+                  <a href="{{ route('showIform',$category->id) }}" class="btn btn-sm btn-success">Add New</a>
+                </div>
                             <div class="card-content table-responsive">
                                 <table id="table" class="table" cellspacing="0" width="100%">
                                     <thead class=" text-dark">
@@ -31,16 +34,13 @@
                                         Image
                                     </th>
                                     <th>
-                                        Price
+                                        Price[rwf]
                                     </th>
                                     <th>
                                         Description
                                     </th>
                                     <th>
                                         Updated At
-                                    </th>
-                                    <th>
-                                        Action
                                     </th>
                                     </thead>
 
@@ -53,23 +53,6 @@
                                             <td> {{  $item->price }}</td>
                                             <td> {{  $item->description }}</td>
                                             <td> {{ $item->updated_at }}</td>
-
-                                            <td>
-                                                <a href="{{ route('item.edit',$item->id) }}" class="btn btn-info btn-sm"><i class="material-icons">mode_edit</i></a>
-
-                                                <form id="delete-form-{{ $item->id }}" action="{{ route('item.destroy',$item->id) }}" style="display: none;" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
-                                                        event.preventDefault();
-                                                        document.getElementById('delete-form-{{ $item->id }}').submit();
-                                                        }else {
-                                                        event.preventDefault();
-                                                        }"><i class="material-icons">delete</i></button>
-                                            </td>
-
-
                                         </tr>
                                         @endforeach
                                 </table>

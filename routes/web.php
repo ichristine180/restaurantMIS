@@ -51,4 +51,7 @@ Route::delete('/destroyUser/{id}','App\Http\Controllers\UserController@destroy')
 // product managements ---- items mgmt
  Route::get('/items','App\Http\Controllers\Admin\ItemController@index')->name('items')->middleware('auth');
  Route::post('/create','App\Http\Controllers\Admin\ItemController@store')->name('create')->middleware('auth');
- Route::get('/showIform','App\Http\Controllers\Admin\ItemController@create')->name('showIform')->middleware('auth');
+ Route::get('/showIform/{id}','App\Http\Controllers\Admin\ItemController@create')->name('showIform')->middleware('auth');
+ Route::delete('/delete/{id}','App\Http\Controllers\Admin\ItemController@destroy')->name('delete')->middleware('auth');
+ Route::put('/editItem/{id}','App\Http\Controllers\Admin\ItemController@update')->name('editItem')->middleware('auth');
+ Route::get('/ShowIUform/{id}','App\Http\Controllers\Admin\ItemController@edit')->name('ShowIUform')->middleware('auth');

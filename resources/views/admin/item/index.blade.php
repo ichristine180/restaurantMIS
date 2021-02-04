@@ -20,9 +20,6 @@
                         <div class="card-header card-header-info">
                             <h4 class="card-title ">All Items</h4>
                         </div>
-                        <div class="col-12 text-right">
-                  <a href="{{ route('showIform') }}" class="btn btn-sm btn-success">Add New</a>
-                </div>
                             <div class="card-content table-responsive">
                                 <table id="table" class="table" cellspacing="0" width="100%">
                                     <thead class=" text-dark">
@@ -39,7 +36,7 @@
                                         Category
                                     </th>
                                     <th>
-                                        Price
+                                    Price[rwf]
                                     </th>
                                     <th>
                                         Description
@@ -64,9 +61,9 @@
                                             <td> {{ $item->updated_at }}</td>
 
                                             <td>
-                                                <a href="{{ route('items',$item->id) }}" class="btn btn-info btn-sm"><i class="material-icons">mode_edit</i></a>
+                                                <a href="{{ route('ShowIUform',$item->id) }}" class="btn btn-info btn-sm"><i class="material-icons">mode_edit</i></a>
 
-                                                <form id="delete-form-{{ $item->id }}" action="{{ route('items',$item->id) }}" style="display: none;" method="POST">
+                                                <form id="delete-form-{{ $item->id }}" action="{{ route('delete',$item->id) }}" style="display: none;" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>

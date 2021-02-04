@@ -23,8 +23,12 @@ class RegisterController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        $listofRoles =DB::table('roles')->get();
-    // dd($roles);
+        $listofRoles = '';
+        if($role != 'Managing Director'){
+            $listofRoles =DB::table('roles')->Where('name','!=','Managing Director')->get();
+            }else{
+                $listofRoles =DB::table('roles')->get();
+            }
         return view('auth.register', compact('role','listofRoles'));
     }
 
@@ -34,8 +38,13 @@ class RegisterController extends Controller
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
         $user =User::find($id);
+        $listofRoles = '';
         // dd($user);
-        $listofRoles =DB::table('roles')->get();
+        if($role != 'Managing Director'){
+        $listofRoles =DB::table('roles')->Where('name','!=','Managing Director')->get();
+        }else{
+            $listofRoles =DB::table('roles')->get();
+        }
     // dd($roles);
         return view('auth.edit', compact('role','listofRoles','user'));
     }

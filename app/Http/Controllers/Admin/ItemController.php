@@ -31,12 +31,13 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
         $categories = Category::all();
-        return view('admin.item.create',compact('categories','role'));
+        $category = Category::find($id);
+        return view('admin.item.create',compact('categories','role','category'));
     }
 
     /**
@@ -48,11 +49,13 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:items',
             'description' =>'required',
             'image' => 'required|mimes:jpeg,jpg,png,bmp',
             'price' =>'required',
             'category' =>'required',
+        ],[
+            'name.unique'=>'item name not available',
         ]);
         $image = $request->file('image');
         $slug = Str::slug($request->name);
@@ -77,7 +80,7 @@ class ItemController extends Controller
         $item->image = $imagename;
         $item->save();
 
-        return redirect()->route('items')->with('successMsg','Item Successfully Added');
+        return redirect()->route('viewItem',$request->category)->with('successMsg','Item Successfully Added');
 
 
 
@@ -102,9 +105,11 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
         $item = Item::find($id);
-        $categories = Category::all();
-        return view('admin.item.edit',compact('item','categories'));
+        // $categories = Category::all();
+        return view('admin.item.edit',compact('item','role'));
     }
 
     /**
@@ -124,7 +129,7 @@ class ItemController extends Controller
         ]);
         $item =Item::find($id);
         $image = $request->file('image');
-        $slug = str_slug($request->name);
+        $slug = Str::slug($request->name);
         if(isset($image)){
 
             $currentdate = Carbon::now()->toDateString();
@@ -147,7 +152,7 @@ class ItemController extends Controller
         $item->category_id = $request->category;
         $item->image = $imagename;
         $item->save();
-        return redirect()->route('item.index')->with('successMsg','Item Successfully Updated');
+        return redirect()->route('items')->with('successMsg','Item Successfully Updated');
     }
 
     /**
