@@ -44,6 +44,22 @@
         </a>
       </li>
       @endif
+      @if($role === 'Waiter')
+      <li class="nav-item{{ $activePage == 'tables' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('tables') }}">
+          <i class="material-icons">table</i>
+            <p>{{ __('Tables') }}</p>
+        </a>
+      </li>
+      @endif
+      @if($role === 'Waiter'||'Supervisor'||'Cashier')
+      <li class="nav-item{{ $activePage == 'orders' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('employees') }}">
+          <i class="material-icons">information</i>
+            <p>{{ __('Orders') }}</p>
+        </a>
+      </li>
+      @endif
     </ul>
   </div>
 </div>

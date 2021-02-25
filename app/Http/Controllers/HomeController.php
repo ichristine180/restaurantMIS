@@ -42,7 +42,7 @@ class HomeController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        return view('managerDashboard', compact('role'));
+        return view('Managerdashboard', compact('role'));
     }
     public function supervisorHome()
     {

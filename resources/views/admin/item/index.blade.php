@@ -61,13 +61,13 @@
                                             <td> {{ $item->updated_at }}</td>
 
                                             <td>
-                                                <a href="{{ route('ShowIUform',$item->id) }}" class="btn btn-info btn-sm"><i class="material-icons">mode_edit</i></a>
+                                                <a href="{{ route('ShowIUform',$item->id) }}" class="btn btn-info btn-sm" title="Edit item"><i class="material-icons">mode_edit</i></a>
 
                                                 <form id="delete-form-{{ $item->id }}" action="{{ route('delete',$item->id) }}" style="display: none;" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
+                                                <button type="button" title="Delete Item" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
                                                         event.preventDefault();
                                                         document.getElementById('delete-form-{{ $item->id }}').submit();
                                                         }else {

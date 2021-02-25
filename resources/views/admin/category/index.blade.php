@@ -14,7 +14,7 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-8" style="margin-right:auto;margin-left:auto;">
+                <div class="col-md-10" style="margin-right:auto;margin-left:auto;">
                     @include('layouts.msg')
 
                     <div class="card">
@@ -54,26 +54,26 @@
                                             <td> {{ $category->updated_at->format('d M Y')}}</td>
                                             <td>{{$category->getNumberOfItem($category->items)}}</td>
                                             <td>
-                                                <a href="{{ route('showform',$category->id) }}" class="btn btn-info btn-sm"><i class="material-icons">mode_edit</i></a>
+                                                <a href="{{ route('showform',$category->id) }}" class="btn btn-info btn-sm" title="Edit category"><i class="material-icons">mode_edit</i></a>
 
                                                 <form id="delete-form-{{ $category->id }}" action="{{ route('destroy',$category->id) }}" style="display: none;" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
+                                                <button type="button" title="Delete Category" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
                                                         event.preventDefault();
                                                         document.getElementById('delete-form-{{ $category->id }}').submit();
                                                         }else {
                                                         event.preventDefault();
                                                         }"><i class="material-icons">delete</i></button>
-                                                        <a href="{{ route('viewItem',$category->id) }}" class="btn btn-success btn-sm"><i class="material-icons md-48">visibility</i></a>
+                                                        <a href="{{ route('viewItem',$category->id) }}" title="View Items" class="btn btn-success btn-sm"><i class="material-icons md-48">visibility</i></a>
                                             </td>
 
 
                                         </tr>
                                         @endforeach
                                 </table>
-                                {!! $categories->links() !!}
+                              
                             </div>
 
                     </div>

@@ -22,8 +22,8 @@ class CategoryController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        $categories = Category::first()->paginate(5);
-        return view('admin.category.index',compact('categories','role')) ->with('i', (request()->input('page', 1) - 1) * 5);
+        $categories = Category::get();
+        return view('admin.category.index',compact('categories','role')) ->with('i');
     }
 
     /**
