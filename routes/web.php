@@ -59,3 +59,8 @@ Route::post('/PostAddRole','App\Http\Controllers\Auth\RegisterController@PostAdd
  Route::get('/ShowIUform/{id}','App\Http\Controllers\Admin\ItemController@edit')->name('ShowIUform')->middleware('auth');
  // waiter -----tables creation
  Route::get('/tables','App\Http\Controllers\WaiterController@tables')->name('tables')->middleware('waiter');
+ Route::post('/createTables','App\Http\Controllers\WaiterController@create')
+ ->name('createTables')->middleware('waiter');
+ Route::delete('/destroyTables/{id}','App\Http\Controllers\WaiterController@destroy')
+ ->name('destroyTables')->middleware('waiter');
+ 
