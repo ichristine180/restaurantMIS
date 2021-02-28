@@ -76,7 +76,7 @@
                     </tbody>
                   
                   </table>
-                  {{ $table->render() }}
+                
                 </div>
               </div>
             </div>

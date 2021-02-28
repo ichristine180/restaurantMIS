@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use DB;
 use App\Models\User;
 use App\Models\Tables;
+use App\Models\Orders;
+use App\Item;
+use DataTables;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Auth;
@@ -19,7 +23,7 @@ class WaiterController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-         $table = Tables::first()->simplePaginate(4);
+         $table = Tables::latest()->get();
          //dd($tables);
         return view('waiter.tables', compact('role','table'))
         ->with('i',(request()->input('page', 1) - 1) * 4);
@@ -48,5 +52,32 @@ class WaiterController extends Controller
         $tables = Tables::find($id);
         $tables->delete();
         return redirect()->back()->with('successMsg','Successfully Deleted');
+    }
+    public function orders()
+    {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
+       
+        return view('waiter.orders', compact('role'));
+    }
+
+    public function ordersList(Request $request)
+    {
+        if ($request->ajax()) {
+            $model = Orders::with(['item','tables']);
+                return DataTables::eloquent($model)
+                ->addIndexColumn()
+                ->addColumn('name',function (Orders $orders) {
+                    return $orders->item->name;
+                })
+                ->addColumn('price',function (Orders $orders) {
+                    return $orders->item->price;
+                })
+                ->addColumn('code',function (Orders $orders) {
+                    return $orders->tables->code;
+                })
+                ->toJson();
+        }
+        return view('waiter.orders');
     }
 }

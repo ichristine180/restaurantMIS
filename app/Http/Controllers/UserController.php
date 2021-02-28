@@ -28,4 +28,5 @@ class UserController extends Controller
         $user->delete();
         return redirect()->back()->with('successMsg','Successfully Deleted');
     }
+    
 }

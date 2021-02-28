@@ -63,4 +63,11 @@ Route::post('/PostAddRole','App\Http\Controllers\Auth\RegisterController@PostAdd
  ->name('createTables')->middleware('waiter');
  Route::delete('/destroyTables/{id}','App\Http\Controllers\WaiterController@destroy')
  ->name('destroyTables')->middleware('waiter');
- 
+ Route::get('/order','App\Http\Controllers\WaiterController@orders')->name('orders')->middleware('waiter');
+ Route::get('students/list', [WaiterController::class, 'getStudents'])->name('waiterHome.list');
+
+ //Route::get('students', [StudentController::class, 'index']);
+
+//Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
+Route::get('/orders','App\Http\Controllers\WaiterController@orders')->name('orders')->middleware('auth');
+Route::get('/orders/list','App\Http\Controllers\WaiterController@ordersList')->name('orders.list')->middleware('waiter');

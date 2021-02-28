@@ -54,7 +54,7 @@
       @endif
       @if($role === 'Waiter'||'Supervisor'||'Cashier')
       <li class="nav-item{{ $activePage == 'orders' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('employees') }}">
+        <a class="nav-link" href="{{ route('orders') }}">
           <i class="material-icons">information</i>
             <p>{{ __('Orders') }}</p>
         </a>

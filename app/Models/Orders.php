@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Models;
-
+use App\Item;
+use App\Models\Tables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Orders extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -17,13 +18,13 @@ class Orders extends Model
     protected $fillable = [
         'userId',
         'itemId',
-        'itemDisCount',
+        'discount',
         'status',
         'tableId',
     ];
     public function item()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Item::class,'itemId','id');
     }
     public function user()
     {
@@ -31,10 +32,7 @@ class Orders extends Model
     }
     public function tables()
     {
-        return $this->belongsTo(Tables::class);
+        return $this->belongsTo(Tables::class,'tablesId','id');
     }
-    public function orders()
-    {
-        return $this->belongsToMany(Orders::class,'cancel_order','userId','orderId','reason');
-    }
+    
 }

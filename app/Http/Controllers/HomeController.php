@@ -30,6 +30,7 @@ class HomeController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+       
         return view('waiterDashboard', compact('role'));
     }
     public function cashierHome()
