@@ -71,3 +71,8 @@ Route::post('/PostAddRole','App\Http\Controllers\Auth\RegisterController@PostAdd
 //Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
 Route::get('/orders','App\Http\Controllers\WaiterController@orders')->name('orders')->middleware('auth');
 Route::get('/orders/list','App\Http\Controllers\WaiterController@ordersList')->name('orders.list')->middleware('waiter');
+Route::get('/orders/nonPayed','App\Http\Controllers\WaiterController@nonPayed')->name('orders.nonPayed')->middleware('waiter');
+Route::get('/orders/paidList','App\Http\Controllers\WaiterController@paidList')->name('orders.paidList')->middleware('waiter');
+Route::get('/orders/paid','App\Http\Controllers\WaiterController@paid')->name('orders.paid')->middleware('waiter');
+Route::get('/orders/archived','App\Http\Controllers\WaiterController@archived')->name('orders.archived')->middleware('waiter');
+Route::get('/orders/archivedList','App\Http\Controllers\WaiterController@archivedList')->name('orders.archivedList')->middleware('waiter');

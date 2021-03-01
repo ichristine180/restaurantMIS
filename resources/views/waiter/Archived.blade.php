@@ -5,17 +5,17 @@
 
     <div class="container" style="margin-top: 10px;margin-bottom: 100px; ">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-10">
       
             <div class="card">
             <div class="row">
-            <a href="{{ route('waiterHome') }}" class="btn btn-sm btn-success" style="margin-left:20px;"> Back To Dashboard</a>
+            <a href="{{ route('waiterHome') }}" class="btn btn-sm btn-success" style="margin-left:640px;"> Back To Dashboard</a>
             </div>
-                <div class="card-header bg-info text-white" style="margin-bottom: 10px; ">ORDERS LIST
+                <div class="card-header bg-info text-white" style="margin-bottom: 10px; ">YOUR PAID ORDERS LIST
 
                 </div>
 
-    <table class="table table-bordered yajra-datatable">
+                <table class="table table-bordered yajra-datatable">
         <thead>
             <tr>
                 <th>No</th>
@@ -25,7 +25,6 @@
                 <th>status</th>
                 <th>Table</th>
                 <th>Quantity</th>
-                <th>Created By</th>
                 <th>Ammount</th>
                 <th>Created At</th>
              
@@ -40,8 +39,8 @@
     </div>
 </div>
 </div>
-@endsection
 
+@endsection
 @push('js')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
@@ -55,7 +54,7 @@
     var table = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('orders.list') }}",
+        ajax: "{{ route('orders.archivedList') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
             {data: 'name', name: 'item.name'},
@@ -64,7 +63,6 @@
             {data: 'status', name: 'status'},
             {data: 'code', name: 'tables.code'},
             {data: 'quantity', name: 'quantity'},
-            {data: 'username', name: 'user.name'},
             {data: 'created_at', name: 'created_at'}
            
            

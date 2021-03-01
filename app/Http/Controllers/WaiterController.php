@@ -64,7 +64,51 @@ class WaiterController extends Controller
     public function ordersList(Request $request)
     {
         if ($request->ajax()) {
-            $model = Orders::with(['item','tables']);
+            $model = Orders::with(['item','tables','user']);
+                return DataTables::eloquent($model)
+                ->addIndexColumn()
+                ->addColumn('name',function (Orders $orders) {
+                    return $orders->item->name;
+                })
+                ->addColumn('price',function (Orders $orders) {
+                    return $orders->item->price;
+                })
+                ->addColumn('code',function (Orders $orders) {
+                    return $orders->tables->code;
+                })
+                ->addColumn('username',function (Orders $orders) {
+                    return $orders->user->name;
+                })
+                ->toJson();
+                return date('d-m-Y', strtotime($orders->created_at) );
+        }
+        return view('waiter.orders');
+    }
+    public function nonPayed(Request $request){
+        if ($request->ajax()) {
+            $model = Orders::with(['item','tables','user'])->where('status','=','pending');
+                return DataTables::eloquent($model)
+                ->addIndexColumn()
+                ->addColumn('name',function (Orders $orders) {
+                    return $orders->item->name;
+                })
+                ->addColumn('price',function (Orders $orders) {
+                    return $orders->item->price;
+                })
+                ->addColumn('code',function (Orders $orders) {
+                    return $orders->tables->code;
+                })
+                ->addColumn('username',function (Orders $orders) {
+                    return $orders->user->name;
+                })
+                ->toJson();
+                return date('d-m-Y', strtotime($orders->created_at) );
+        }
+        return view('waiterDashboard');
+    }
+    public function paidList(Request $request){
+        if ($request->ajax()) {
+            $model = Orders::with(['item','tables','user'])->where('status','=','paid');
                 return DataTables::eloquent($model)
                 ->addIndexColumn()
                 ->addColumn('name',function (Orders $orders) {
@@ -77,7 +121,41 @@ class WaiterController extends Controller
                     return $orders->tables->code;
                 })
                 ->toJson();
+                return date('d-m-Y', strtotime($orders->created_at) );
         }
-        return view('waiter.orders');
+        return view('waiter.Paid');
+    }
+    public function paid()
+    {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
+       
+        return view('waiter.Paid', compact('role'));
+    }
+    public function archived()
+    {
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
+       
+        return view('waiter.Archived', compact('role'));
+    }
+    public function archivedList(Request $request){
+        if ($request->ajax()) {
+            $model = Orders::with(['item','tables','user'])->where('status','=','archived');
+                return DataTables::eloquent($model)
+                ->addIndexColumn()
+                ->addColumn('name',function (Orders $orders) {
+                    return $orders->item->name;
+                })
+                ->addColumn('price',function (Orders $orders) {
+                    return $orders->item->price;
+                })
+                ->addColumn('code',function (Orders $orders) {
+                    return $orders->tables->code;
+                })
+                ->toJson();
+                return date('d-m-Y', strtotime($orders->created_at) );
+        }
+        return view('waiter.archived');
     }
 }

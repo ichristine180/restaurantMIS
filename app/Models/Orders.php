@@ -3,6 +3,7 @@
 namespace App\Models;
 use App\Item;
 use App\Models\Tables;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,6 +22,7 @@ class Orders extends Model
         'discount',
         'status',
         'tableId',
+        'quantity'
     ];
     public function item()
     {
@@ -28,7 +30,7 @@ class Orders extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'userId','id');
     }
     public function tables()
     {

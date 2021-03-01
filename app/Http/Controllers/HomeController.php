@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Auth;
 use App\Models\User;
+use App\Models\Orders;
 class HomeController extends Controller
 {
     /**
@@ -30,8 +31,12 @@ class HomeController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-       
-        return view('waiterDashboard', compact('role'));
+       $payedOrders = Orders::where('status','=','paid')->count();
+       $allOrders = Orders::get()->count();
+       $nonPayedOrders = Orders::where('status','=','pending')->count();
+       $archivedOrders = Orders::where('status','=','pending')->count();
+       //dd($payedOrders);
+        return view('waiterDashboard', compact('role','archivedOrders','nonPayedOrders','allOrders','payedOrders'));
     }
     public function cashierHome()
     {

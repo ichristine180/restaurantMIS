@@ -9,15 +9,15 @@
               <div class="card-icon">
                 <i class="material-icons">content_copy</i>
               </div>
-              <p class="card-category">Products</p>
-              <h3 class="card-title">50
+              <p class="card-category">Payed Orders</p>
+              <h3 class="card-title">{{$payedOrders}}
                 <small></small>
               </h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons text-danger">warning</i>
-                <a href="#pablo">details</a>
+              <i class="material-icons">date_range</i>
+                <a href="{{ route('orders.paid') }}">details</a>
               </div>
             </div>
           </div>
@@ -28,12 +28,13 @@
               <div class="card-icon">
                 <i class="material-icons">store</i>
               </div>
-              <p class="card-category">Orders</p>
-              <h3 class="card-title">245</h3>
+              <p class="card-category">Non Payed </p>
+              <h3 class="card-title">{{$nonPayedOrders}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">date_range</i> detais
+              <i class="material-icons">date_range</i>
+                <a href="#">details</a>
               </div>
             </div>
           </div>
@@ -42,14 +43,15 @@
           <div class="card card-stats">
             <div class="card-header card-header-danger card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">person</i>
+                <i class="material-icons">store</i>
               </div>
-              <p class="card-category">Employees</p>
-              <h3 class="card-title">75</h3>
+              <p class="card-category">Archived </p>
+              <h3 class="card-title">{{$archivedOrders}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">local_offer</i> details
+              <i class="material-icons">date_range</i>
+              <a href="{{ route('orders.archived') }}">details</a>
               </div>
             </div>
           </div>
@@ -58,20 +60,88 @@
           <div class="card card-stats">
             <div class="card-header card-header-info card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">money</i>
+                <i class="material-icons">store</i>
               </div>
-              <p class="card-category">Transactions</p>
-              <h3 class="card-title">75</h3>
+              <p class="card-category">All Orders</p>
+              <h3 class="card-title">{{$allOrders}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">local_offer</i> details
+              <i class="material-icons">date_range</i>
+                <a href="{{ route('orders') }}">details</a>
               </div>
             </div>
           </div>
         </div>
       
      
+    <div class="container" style="margin-top: -10px;margin-bottom: 100px; ">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+      
+            <div class="card">
+            <div class="row">
+            <a href="#" class="btn btn-sm btn-success" style="margin-left:15px;">Create Orders</a>
+            </div>
+                <div class="card-header bg-info text-white" style="margin-bottom: 10px; ">YOUR NON PAYED ORDERS LIST
+
+                </div>
+
+    <table class="table table-bordered yajra-datatable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Item</th>
+                <th>Price [rwf]</th>
+                <th>DisCount[rwf]</th>
+                <th>status</th>
+                <th>Table</th>
+                <th>Quantity</th>
+                <th>Ammount</th>
+                <th>Created At</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 @endsection
+@push('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+    $i=0;
+    var table = $('.yajra-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('orders.nonPayed') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
+            {data: 'name', name: 'item.name'},
+            {data: 'price', name: 'item.price'},
+            {data: 'discount', name: 'discount'},
+            {data: 'status', name: 'status'},
+            {data: 'code', name: 'tables.code'},
+            {data: 'quantity', name: 'quantity'},
+            {data: 'created_at', name: 'created_at'}
+           
+           
+           
+        ]
+    });
+    
+  });
+</script>
+@endpush

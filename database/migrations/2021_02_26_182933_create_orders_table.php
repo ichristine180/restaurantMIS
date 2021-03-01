@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('tablesId');
             $table->unsignedInteger('itemId');
             $table->Double('discount');
+            $table->unsignedInteger('quantity');
             $table->String('status');
             $table->timestamps();
         });
