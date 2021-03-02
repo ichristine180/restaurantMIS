@@ -78,10 +78,10 @@
     <div class="container" style="margin-top: -10px;margin-bottom: 100px; ">
     <div class="row justify-content-center">
         <div class="col-md-12">
-      
+        @include('layouts.msg')
             <div class="card">
             <div class="row">
-            <a href="#" class="btn btn-sm btn-success" style="margin-left:15px;">Create Orders</a>
+            <a href="{{ route('orders.create') }}" class="btn btn-sm btn-success" style="margin-left:15px;">Create Orders</a>
             </div>
                 <div class="card-header bg-info text-white" style="margin-bottom: 10px; ">YOUR NON PAYED ORDERS LIST
 

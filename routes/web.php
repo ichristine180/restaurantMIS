@@ -76,3 +76,5 @@ Route::get('/orders/paidList','App\Http\Controllers\WaiterController@paidList')-
 Route::get('/orders/paid','App\Http\Controllers\WaiterController@paid')->name('orders.paid')->middleware('waiter');
 Route::get('/orders/archived','App\Http\Controllers\WaiterController@archived')->name('orders.archived')->middleware('waiter');
 Route::get('/orders/archivedList','App\Http\Controllers\WaiterController@archivedList')->name('orders.archivedList')->middleware('waiter');
+Route::get('/orders/create','App\Http\Controllers\WaiterController@createOrders')->name('orders.create')->middleware('waiter');
+Route::post('/orders/postOrders','App\Http\Controllers\WaiterController@postOrders')->name('orders.postOrders')->middleware('waiter');

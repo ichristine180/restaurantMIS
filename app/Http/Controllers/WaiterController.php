@@ -86,8 +86,14 @@ class WaiterController extends Controller
     }
     public function nonPayed(Request $request){
         if ($request->ajax()) {
-            $model = Orders::with(['item','tables','user'])->where('status','=','pending');
+            $model = Orders::with(['item','tables','user'])->where('status','=','pending')
+            ->orderBy('created_at', 'DESC');
                 return DataTables::eloquent($model)
+                ->editColumn('created_at', function ($orders) 
+                {
+    //change over here
+               return date('m-d H', strtotime($orders->created_at) );
+                  })
                 ->addIndexColumn()
                 ->addColumn('name',function (Orders $orders) {
                     return $orders->item->name;
@@ -102,7 +108,6 @@ class WaiterController extends Controller
                     return $orders->user->name;
                 })
                 ->toJson();
-                return date('d-m-Y', strtotime($orders->created_at) );
         }
         return view('waiterDashboard');
     }
@@ -158,4 +163,40 @@ class WaiterController extends Controller
         }
         return view('waiter.archived');
     }
+    public function createOrders(){
+        $user = new User();
+        $role = $user->userRole(Auth::User()->role);
+        $table = Tables::get();
+        $items = Item::get();
+       
+        return view('waiter.create', compact('role','items','table'));
+    }
+    public function postOrders(Request $request){
+        request()->validate([
+            'item' => ['required'],
+            'table' => ['required'],
+            'quantity' => ['required'],
+        ],
+            );
+            $data = $request->all();
+            $discount;
+            if($request->discount == null){
+                $discount = 0;
+            }else{
+                $discount = $request->discount;
+            }
+            $orders = Orders::create([
+                'tablesId' => $data['table'],
+                'itemId' => $data['item'],
+                'quantity' => $data['quantity'],
+                'status' => 'pending',
+                'userId' => Auth::user()->id,
+                'discount'=> $discount
+            ]);
+
+            if($orders != null){
+                return redirect('waiterHome')->with('successMsg','Successfully created');
+            }
+            return back()->with('errorMsg','not created');
+        }
 }
