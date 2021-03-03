@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->Double('discount');
             $table->unsignedInteger('quantity');
             $table->String('status');
+            $table->Double('ammount');
             $table->timestamps();
         });
     }

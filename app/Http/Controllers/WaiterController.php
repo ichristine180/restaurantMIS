@@ -23,6 +23,7 @@ class WaiterController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
          $table = Tables::latest()->get();
          //dd($tables);
         return view('waiter.tables', compact('role','table'))
@@ -57,8 +58,9 @@ class WaiterController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
        
-        return view('waiter.orders', compact('role'));
+        return view('waiter.orders', compact('role','isWaiter'));
     }
 
     public function ordersList(Request $request)
@@ -67,6 +69,11 @@ class WaiterController extends Controller
             $model = Orders::with(['item','tables','user']);
                 return DataTables::eloquent($model)
                 ->addIndexColumn()
+                ->editColumn('created_at', function ($orders) 
+                {
+    //change over here
+               return date('m-d H', strtotime($orders->created_at) );
+                  })
                 ->addColumn('name',function (Orders $orders) {
                     return $orders->item->name;
                 })
@@ -87,6 +94,7 @@ class WaiterController extends Controller
     public function nonPayed(Request $request){
         if ($request->ajax()) {
             $model = Orders::with(['item','tables','user'])->where('status','=','pending')
+            ->where('userId','=',Auth::user()->id)
             ->orderBy('created_at', 'DESC');
                 return DataTables::eloquent($model)
                 ->editColumn('created_at', function ($orders) 
@@ -113,9 +121,16 @@ class WaiterController extends Controller
     }
     public function paidList(Request $request){
         if ($request->ajax()) {
-            $model = Orders::with(['item','tables','user'])->where('status','=','paid');
+            $model = Orders::with(['item','tables','user'])->where('status','=','paid')
+          ;
                 return DataTables::eloquent($model)
+                
                 ->addIndexColumn()
+                ->editColumn('created_at', function ($orders) 
+                {
+    //change over here
+               return date('m-d H', strtotime($orders->created_at) );
+                  })
                 ->addColumn('name',function (Orders $orders) {
                     return $orders->item->name;
                 })
@@ -134,21 +149,28 @@ class WaiterController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-       
-        return view('waiter.Paid', compact('role'));
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('waiter.Paid', compact('role','isWaiter'));
     }
     public function archived()
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('waiter.Archived', compact('role','isWaiter'));
        
-        return view('waiter.Archived', compact('role'));
     }
     public function archivedList(Request $request){
         if ($request->ajax()) {
-            $model = Orders::with(['item','tables','user'])->where('status','=','archived');
+            $model = Orders::with(['item','tables','user'])->where('status','=','archived')
+            ->where('userId','=',Auth::user()->id);
                 return DataTables::eloquent($model)
                 ->addIndexColumn()
+                ->editColumn('created_at', function ($orders) 
+                {
+    //change over here
+               return date('m-d H', strtotime($orders->created_at) );
+                  })
                 ->addColumn('name',function (Orders $orders) {
                     return $orders->item->name;
                 })
@@ -159,9 +181,9 @@ class WaiterController extends Controller
                     return $orders->tables->code;
                 })
                 ->toJson();
-                return date('d-m-Y', strtotime($orders->created_at) );
+                
         }
-        return view('waiter.archived');
+        return view('waiter.Archived');
     }
     public function createOrders(){
         $user = new User();
@@ -185,13 +207,16 @@ class WaiterController extends Controller
             }else{
                 $discount = $request->discount;
             }
+            $ammount = Item::find($data['item'])->price*$data['quantity'] -$discount;
+            //dd($ammount);
             $orders = Orders::create([
                 'tablesId' => $data['table'],
                 'itemId' => $data['item'],
                 'quantity' => $data['quantity'],
                 'status' => 'pending',
                 'userId' => Auth::user()->id,
-                'discount'=> $discount
+                'discount'=> $discount,
+                'ammount'=> $ammount
             ]);
 
             if($orders != null){

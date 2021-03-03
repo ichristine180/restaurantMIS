@@ -60,6 +60,14 @@
         </a>
       </li>
       @endif
+      @if($isWaiter)
+      <li class="nav-item{{ $activePage == '' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('waiterHome') }}">
+          <i class="material-icons">dashboard</i>
+            <p>{{ __('Waiter Dashboard') }}</p>
+        </a>
+      </li>
+      @endif
     </ul>
   </div>
 </div>

@@ -19,7 +19,8 @@ class UserController extends Controller
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
         $users = User::first()->paginate(5);
-        return view('users.index', compact('users','role'))
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('users.index', compact('users','role','isWaiter'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     public function destroy($id)

@@ -9,7 +9,7 @@
       
             <div class="card">
             <div class="row">
-            <a href="{{ route('waiterHome') }}" class="btn btn-sm btn-success" style="margin-left:640px;"> Back To Dashboard</a>
+            <a href="{{ route('waiterHome') }}" class="btn btn-sm btn-success" style="margin-left:20px;"> Back To Dashboard</a>
             </div>
                 <div class="card-header bg-info text-white" style="margin-bottom: 10px; ">YOUR PAID ORDERS LIST
 
@@ -63,6 +63,7 @@
             {data: 'status', name: 'status'},
             {data: 'code', name: 'tables.code'},
             {data: 'quantity', name: 'quantity'},
+            {data: 'ammount', name: 'ammount'},
             {data: 'created_at', name: 'created_at'}
            
            

@@ -70,4 +70,17 @@ class User extends Authenticatable
         }
         return $role;
     }
+    public function hasWaiter($roles){
+        $userRoles = [];
+        $role = '';
+        foreach ($roles as $role) {
+           $users= $role->pivot->role_id;
+           $name= Role::find($users)->name;
+           array_push($userRoles, $name);
+        }
+        if(in_array('Waiter',$userRoles) && count($userRoles) != 1){
+           return true;
+        }
+        return false;
+    }
 }

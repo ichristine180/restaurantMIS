@@ -25,12 +25,14 @@ class ProfileController extends Controller
     public function profile(){
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        return view('profile/Profile',compact('role'));
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('profile/Profile',compact('role','isWaiter'));
     }
     public function changePassword(){
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        return view('profile/edit',compact('role'));
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('profile/edit',compact('role','isWaiter'));
     }
     public function postProfile(Request $request){
                 $id = Auth::User()->id;

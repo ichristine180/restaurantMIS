@@ -25,35 +25,49 @@ class HomeController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        return view('dashboard', compact('role'));
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('dashboard', compact('role','isWaiter'));
     }
     public function waiterHome()
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-       $payedOrders = Orders::where('status','=','paid')->count();
-       $allOrders = Orders::get()->count();
-       $nonPayedOrders = Orders::where('status','=','pending')->count();
-       $archivedOrders = Orders::where('status','=','pending')->count();
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+       $payedOrders = Orders::where('status','=','paid')
+       ->where('userId','=',Auth::user()->id)
+       ->count();
+       $allOrders = Orders::get()
+       
+       ->count();
+       $nonPayedOrders = Orders::where('status','=','pending')
+       ->where('userId','=',Auth::user()->id)
+       ->count();
+       $archivedOrders = Orders::where('status','=','archived')
+       ->where('userId','=',Auth::user()->id)
+       ->count();
        //dd($payedOrders);
-        return view('waiterDashboard', compact('role','archivedOrders','nonPayedOrders','allOrders','payedOrders'));
+        return view('waiterDashboard', compact('role','archivedOrders','nonPayedOrders',
+        'allOrders','payedOrders','isWaiter'));
     }
     public function cashierHome()
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        return view('cashierDashboard', compact('role'));
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('cashierDashboard', compact('role','isWaiter'));
     }
     public function managerHome()
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        return view('Managerdashboard', compact('role'));
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('Managerdashboard', compact('role','isWaiter'));
     }
     public function supervisorHome()
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        return view('superVisorDashboard', compact('role'));
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('superVisorDashboard', compact('role','isWaiter'));
     }
 }

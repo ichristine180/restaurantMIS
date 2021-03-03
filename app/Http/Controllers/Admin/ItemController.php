@@ -22,8 +22,9 @@ class ItemController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
         $items = Item::all();
-        return view('admin.item.index',compact('items','role'));
+        return view('admin.item.index',compact('items','role','isWaiter'));
     }
 
     /**
@@ -35,9 +36,10 @@ class ItemController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
         $categories = Category::all();
         $category = Category::find($id);
-        return view('admin.item.create',compact('categories','role','category'));
+        return view('admin.item.create',compact('categories','role','category','isWaiter'));
     }
 
     /**
@@ -107,9 +109,10 @@ class ItemController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
         $item = Item::find($id);
         // $categories = Category::all();
-        return view('admin.item.edit',compact('item','role'));
+        return view('admin.item.edit',compact('item','role','isWaiter'));
     }
 
     /**

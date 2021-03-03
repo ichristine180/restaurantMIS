@@ -22,8 +22,9 @@ class CategoryController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
         $categories = Category::get();
-        return view('admin.category.index',compact('categories','role')) ->with('i');
+        return view('admin.category.index',compact('categories','role','isWaiter')) ->with('i');
     }
 
     /**
@@ -35,7 +36,8 @@ class CategoryController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
-        return view('admin.category.create',compact('role'));
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('admin.category.create',compact('role','isWaiter'));
     }
 
     /**
@@ -70,9 +72,10 @@ class CategoryController extends Controller
         //
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
         $category = Category::find($id);
         $items = Item::where('category_id','=',$id)->paginate(5);
-        return view('admin.category.item',compact('items','role','category')) ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('admin.category.item',compact('items','role','category','isWaiter')) ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -85,8 +88,9 @@ class CategoryController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
         $category = Category::find($id);
-        return view('admin.category.edit',compact('category','role'));
+        return view('admin.category.edit',compact('category','role','isWaiter'));
     }
 
     /**

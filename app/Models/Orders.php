@@ -24,7 +24,8 @@ class Orders extends Model
         'discount',
         'status',
         'tablesId',
-        'quantity'
+        'quantity',
+        'ammount'
     ];
     public function item()
     {

@@ -65,6 +65,7 @@
             {data: 'code', name: 'tables.code'},
             {data: 'quantity', name: 'quantity'},
             {data: 'username', name: 'user.name'},
+            {data: 'ammount', name: 'ammount'},
             {data: 'created_at', name: 'created_at'}
            
            

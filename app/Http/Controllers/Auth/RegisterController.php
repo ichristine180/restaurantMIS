@@ -23,13 +23,14 @@ class RegisterController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
         $listofRoles = '';
         if($role != 'Managing Director'){
             $listofRoles =DB::table('roles')->Where('name','!=','Managing Director')->get();
             }else{
                 $listofRoles =DB::table('roles')->get();
             }
-        return view('auth.register', compact('role','listofRoles'));
+        return view('auth.register', compact('role','listofRoles','isWaiter'));
     }
 
     
@@ -37,6 +38,7 @@ class RegisterController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
         $user =User::find($id);
         $listofRoles = '';
         // dd($user);
@@ -46,7 +48,7 @@ class RegisterController extends Controller
             $listofRoles =DB::table('roles')->get();
         }
     // dd($roles);
-        return view('auth.edit', compact('role','listofRoles','user'));
+        return view('auth.edit', compact('role','listofRoles','user','isWaiter'));
     }
     
 
@@ -119,6 +121,7 @@ class RegisterController extends Controller
     {
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
         $user =User::find($id);
         $exitRole = $user->userRole($user->role);
         $listofRoles = '';
@@ -130,7 +133,7 @@ class RegisterController extends Controller
             $listofRoles =DB::table('roles')->Where('name','=','Waiter')->orWhere('name','=','Supervisor')->get();
         }
     // dd($listofRoles);
-        return view('users.addRole', compact('role','listofRoles','user'));
+        return view('users.addRole', compact('role','listofRoles','user','isWaiter'));
     }
 
     protected function PostAddRole(Request $request)
