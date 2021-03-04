@@ -50,7 +50,7 @@
     var table = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('orders.archivedList') }}",
+        ajax: "{{ route('orders.cashier.archivedList') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
             {data: 'name', name: 'item.name'},

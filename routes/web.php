@@ -70,7 +70,7 @@ Route::post('/PostAddRole','App\Http\Controllers\Auth\RegisterController@PostAdd
 
 //Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
 Route::get('/orders','App\Http\Controllers\WaiterController@orders')->name('orders')->middleware('auth');
-Route::get('/orders/list','App\Http\Controllers\WaiterController@ordersList')->name('orders.list')->middleware('waiter');
+Route::get('/orders/list','App\Http\Controllers\WaiterController@ordersList')->name('orders.list')->middleware('auth');
 Route::get('/orders/nonPayed','App\Http\Controllers\WaiterController@nonPayed')->name('orders.nonPayed')->middleware('waiter');
 Route::get('/orders/paidList','App\Http\Controllers\WaiterController@paidList')->name('orders.paidList')->middleware('waiter');
 Route::get('/orders/paid','App\Http\Controllers\WaiterController@paid')->name('orders.paid')->middleware('waiter');
@@ -78,3 +78,10 @@ Route::get('/orders/archived','App\Http\Controllers\WaiterController@archived')-
 Route::get('/orders/archivedList','App\Http\Controllers\WaiterController@archivedList')->name('orders.archivedList')->middleware('waiter');
 Route::get('/orders/create','App\Http\Controllers\WaiterController@createOrders')->name('orders.create')->middleware('waiter');
 Route::post('/orders/postOrders','App\Http\Controllers\WaiterController@postOrders')->name('orders.postOrders')->middleware('waiter');
+
+// cashier routes
+Route::get('/orders/cashier/nonPayed','App\Http\Controllers\CashierController@nonPayed')->name('orders.cashier.nonPayed')->middleware('auth');
+Route::get('/orders/cashier/paidList','App\Http\Controllers\CashierController@paidList')->name('orders.cashier.paidList')->middleware('auth');
+Route::get('/orders/cashier/paid','App\Http\Controllers\CashierController@paid')->name('orders.cashier.paid')->middleware('auth');
+Route::get('/orders/cashier/archived','App\Http\Controllers\CashierController@archived')->name('orders.cashier.archived')->middleware('auth');
+Route::get('/orders/cashier/archivedList','App\Http\Controllers\CashierController@archivedList')->name('orders.cashier.archivedList')->middleware('auth');

@@ -43,14 +43,13 @@
 @endsection
 @push('js')
 
-
 <script type="text/javascript">
   $(function () {
     $i=0;
     var table = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('orders.archivedList') }}",
+        ajax: "{{ route('orders.cashier.paidList') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
             {data: 'name', name: 'item.name'},

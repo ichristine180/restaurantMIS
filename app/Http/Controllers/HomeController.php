@@ -37,7 +37,6 @@ class HomeController extends Controller
        ->where('userId','=',Auth::user()->id)
        ->count();
        $allOrders = Orders::get()
-       
        ->count();
        $nonPayedOrders = Orders::where('status','=','pending')
        ->where('userId','=',Auth::user()->id)
@@ -54,7 +53,21 @@ class HomeController extends Controller
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
         $isWaiter = $user->hasWaiter(Auth::User()->role);
-        return view('cashierDashboard', compact('role','isWaiter'));
+        $payedOrders = Orders::where('status','=','paid')
+      
+        ->count();
+        $allOrders = Orders::get()
+        ->count();
+        $nonPayedOrders = Orders::where('status','=','pending')
+       
+        ->count();
+        $archivedOrders = Orders::where('status','=','archived')
+       
+        ->count();
+        //dd($payedOrders);
+         return view('CashierDashboard', compact('role','archivedOrders','nonPayedOrders',
+         'allOrders','payedOrders','isWaiter'));
+       
     }
     public function managerHome()
     {
