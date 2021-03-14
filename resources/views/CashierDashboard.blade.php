@@ -97,6 +97,7 @@
                 <th>Quantity</th>
                 <th>Ammount</th>
                 <th>Created At</th>
+                <th>Action</th>
              
             </tr>
         </thead>
@@ -129,7 +130,8 @@
             {data: 'code', name: 'tables.code'},
             {data: 'quantity', name: 'quantity'},
             {data: 'ammount', name: 'ammount'},
-            {data: 'created_at', name: 'created_at'}
+            {data: 'created_at', name: 'created_at'},
+            {data: 'Actions', name: 'Actions',orderable:false,serachable:false,sClass:'text-center'}
            
            
            

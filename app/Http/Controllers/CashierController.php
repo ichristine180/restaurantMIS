@@ -38,6 +38,14 @@ class CashierController extends Controller
                 ->addColumn('username',function (Orders $orders) {
                     return $orders->user->name;
                 })
+                ->addColumn('Actions', function($orders) {
+                    if($orders->bill == null){
+                    return '<a href="/bill/'.$orders->id.'" class="btn btn-success btn-sm" id="getEditArticleData"  target="_blank" >Create bills</a>';
+                    }
+                    return '
+                    <a href="/bill/'.$orders->id.'" class="btn btn-info btn-sm" id="getEditArticleData"  target="_blank" >Pay</a>';
+                })
+                ->rawColumns(['Actions'])
                 ->toJson();
         }
         return view('waiterDashboard');

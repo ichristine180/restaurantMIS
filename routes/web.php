@@ -85,3 +85,4 @@ Route::get('/orders/cashier/paidList','App\Http\Controllers\CashierController@pa
 Route::get('/orders/cashier/paid','App\Http\Controllers\CashierController@paid')->name('orders.cashier.paid')->middleware('auth');
 Route::get('/orders/cashier/archived','App\Http\Controllers\CashierController@archived')->name('orders.cashier.archived')->middleware('auth');
 Route::get('/orders/cashier/archivedList','App\Http\Controllers\CashierController@archivedList')->name('orders.cashier.archivedList')->middleware('auth');
+Route::get('/bill/{orderId}','App\Http\Controllers\BillController@create')->name('bill')->middleware('cashier');
