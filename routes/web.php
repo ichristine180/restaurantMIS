@@ -86,3 +86,15 @@ Route::get('/orders/cashier/paid','App\Http\Controllers\CashierController@paid')
 Route::get('/orders/cashier/archived','App\Http\Controllers\CashierController@archived')->name('orders.cashier.archived')->middleware('auth');
 Route::get('/orders/cashier/archivedList','App\Http\Controllers\CashierController@archivedList')->name('orders.cashier.archivedList')->middleware('auth');
 Route::get('/bill/{orderId}','App\Http\Controllers\BillController@create')->name('bill')->middleware('cashier');
+Route::get('/pay/{billId}','App\Http\Controllers\BillController@pay')->name('pay')->middleware('cashier');
+Route::get('/bills','App\Http\Controllers\BillController@bills')->name('bills')->middleware('cashier');
+Route::get('/bills/paid','App\Http\Controllers\BillController@paidBills')->name('bills.payed')->middleware('cashier');
+Route::get('/bills/nonPaid','App\Http\Controllers\BillController@nonPaid')->name('bills.nonPayed')->middleware('cashier');
+Route::get('/bills/nonPayedList','App\Http\Controllers\BillController@notpaidBills')->name('bills.nonPayedList')->middleware('cashier');
+Route::get('/bills/archived','App\Http\Controllers\BillController@archived')->name('bills.archived')->middleware('cashier');
+Route::get('/bills/billsList','App\Http\Controllers\BillController@billsList')->name('bills.billsList')->middleware('cashier');
+Route::get('/bills/archivedList','App\Http\Controllers\BillController@archivedList')->name('bills.archivedList')->middleware('cashier');
+Route::get('/bills/all','App\Http\Controllers\BillController@all')->name('bills.all')->middleware('cashier');
+Route::get('/bills/printAll','App\Http\Controllers\BillController@printAll')->name('printAll')->middleware('cashier');
+
+Route::get('/orders/supervisor/nonPayed','App\Http\Controllers\SuperVisorController@nonPayed')->name('orders.supervisor.nonPayed')->middleware('auth');

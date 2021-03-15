@@ -35,7 +35,7 @@
 
   <table>
     <tr>
-        <td><strong>billNumber:</strong>0000000
+        <td><strong>billNumber:</strong>{{$data->billNumber}}
         <strong>Table:</strong>011</td>
     </tr>
   </table>

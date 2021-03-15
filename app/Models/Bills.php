@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\User;
+use App\Models\Orders;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +13,8 @@ class Bills extends Model
     protected $fillable = [
         'userId',
         'orderId',
-        'status'
+        'status',
+        'billNumber'
     ];
     public function order()
     {

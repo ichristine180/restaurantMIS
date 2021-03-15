@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Dashboard')])
+@extends('layouts.app', ['activePage' => 'Bills', 'titlePage' => __('bills')])
 
 @section('content')
   <div class="content">
@@ -9,27 +9,10 @@
               <div class="card-icon">
                 <i class="material-icons">content_copy</i>
               </div>
-              <p class="card-category">Payed Orders</p>
-              <h3 class="card-title">{{$payedOrders}}
+              <p class="card-category">Payed Bills</p>
+              <h3 class="card-title">{{$payedBills}}
                 <small></small>
               </h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-              <i class="material-icons">date_range</i>
-                <a href="{{ route('orders.cashier.paid') }}">details</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-success card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">store</i>
-              </div>
-              <p class="card-category">Non Payed </p>
-              <h3 class="card-title">{{$nonPayedOrders}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -41,17 +24,34 @@
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">store</i>
+              </div>
+              <p class="card-category">Non Payed </p>
+              <h3 class="card-title">{{$nonPayedBills}}</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+              <i class="material-icons">date_range</i>
+              <a href="{{ route('bills.nonPayed') }}">details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
             <div class="card-header card-header-danger card-header-icon">
               <div class="card-icon">
                 <i class="material-icons">store</i>
               </div>
               <p class="card-category">Archived </p>
-              <h3 class="card-title">{{$archivedOrders}}</h3>
+              <h3 class="card-title">{{$archivedBills}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
               <i class="material-icons">date_range</i>
-              <a href="{{ route('orders.cashier.archived') }}">details</a>
+              <a href="{{ route('bills.archived') }}">details</a>
               </div>
             </div>
           </div>
@@ -62,13 +62,13 @@
               <div class="card-icon">
                 <i class="material-icons">store</i>
               </div>
-              <p class="card-category">All Orders</p>
-              <h3 class="card-title">{{$allOrders}}</h3>
+              <p class="card-category">All Bills</p>
+              <h3 class="card-title">{{$allBills}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
               <i class="material-icons">date_range</i>
-                <a href="{{ route('orders') }}">details</a>
+                <a href="{{ route('bills.billsList') }}">details</a>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@
         @include('layouts.msg')
             <div class="card">
             
-                <div class="card-header bg-info text-white" style="margin-bottom: 10px; ">NON PAYED ORDERS LIST
+                <div class="card-header bg-info text-white" style="margin-bottom: 10px; "> PAID BILLS LIST
 
                 </div>
 
@@ -89,15 +89,12 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Item</th>
-                <th>Price [rwf]</th>
-                <th>DisCount[rwf]</th>
+                <th>BillNumber</th>
+                <th>Ammount [rwf]</th>
                 <th>status</th>
-                <th>Table</th>
-                <th>Quantity</th>
-                <th>Ammount</th>
-                <th>Created At</th>
-                <th>Action</th>
+                <th>Done By</th>
+                <th>Paid At</th>
+                
              
             </tr>
         </thead>
@@ -120,18 +117,15 @@
     var table = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('orders.supervisor.nonPayed') }}",
+        ajax: "{{ route('bills.payed') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
-            {data: 'name', name: 'item.name'},
-            {data: 'price', name: 'item.price'},
-            {data: 'discount', name: 'discount'},
+            {data: 'billNumber', name: 'billNumber'},
+            {data: 'ammount', name: 'order.ammount'},
             {data: 'status', name: 'status'},
-            {data: 'code', name: 'tables.code'},
-            {data: 'quantity', name: 'quantity'},
-            {data: 'ammount', name: 'ammount'},
-            {data: 'created_at', name: 'created_at'},
-            {data: 'Actions', name: 'Actions',orderable:false,serachable:false,sClass:'text-center'}
+            {data: 'name', name: 'user.name'},
+            {data: 'updated_at', name: 'updated_at'},
+           
            
            
            
@@ -140,4 +134,4 @@
     
   });
 </script>
-@endpush
+@endpush 

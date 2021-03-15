@@ -43,7 +43,7 @@ class CashierController extends Controller
                     return '<a href="/bill/'.$orders->id.'" class="btn btn-success btn-sm" id="getEditArticleData"  target="_blank" >Create bills</a>';
                     }
                     return '
-                    <a href="/bill/'.$orders->id.'" class="btn btn-info btn-sm" id="getEditArticleData"  target="_blank" >Pay</a>';
+                    <a href="/pay/'.$orders->bill->id.'" class="btn btn-info btn-sm" id="getEditArticleData">Pay</a>';
                 })
                 ->rawColumns(['Actions'])
                 ->toJson();

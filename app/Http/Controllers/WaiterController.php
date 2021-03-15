@@ -26,7 +26,8 @@ class WaiterController extends Controller
         $isWaiter = $user->hasWaiter(Auth::User()->role);
          $table = Tables::latest()->get();
          //dd($tables);
-        return view('waiter.tables', compact('role','table'))
+         $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('waiter.tables', compact('role','table','isWaiter'))
         ->with('i',(request()->input('page', 1) - 1) * 4);
     }
     public function create(){
@@ -190,8 +191,8 @@ class WaiterController extends Controller
         $role = $user->userRole(Auth::User()->role);
         $table = Tables::get();
         $items = Item::get();
-       
-        return view('waiter.create', compact('role','items','table'));
+        $isWaiter = $user->hasWaiter(Auth::User()->role);
+        return view('waiter.create', compact('role','items','table','isWaiter'));
     }
     public function postOrders(Request $request){
         request()->validate([

@@ -68,6 +68,14 @@
         </a>
       </li>
       @endif
+      @if($role == 'Cashier')
+      <li class="nav-item{{ $activePage == 'Bills' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('bills') }}">
+          <i class="material-icons">money</i>
+            <p>{{ __('Bills') }}</p>
+        </a>
+      </li>
+      @endif
     </ul>
   </div>
 </div>

@@ -18,6 +18,7 @@ class CreateBillsTable extends Migration
             $table->unsignedInteger('userId');
             $table->unsignedInteger('orderId');
             $table->String('status');
+            $table->String('billNumber');
             $table->timestamps();
         });
     }

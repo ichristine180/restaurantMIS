@@ -81,6 +81,20 @@ class HomeController extends Controller
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
         $isWaiter = $user->hasWaiter(Auth::User()->role);
-        return view('superVisorDashboard', compact('role','isWaiter'));
+        $payedOrders = Orders::where('status','=','paid')
+      
+        ->count();
+        $allOrders = Orders::get()
+        ->count();
+        $nonPayedOrders = Orders::where('status','=','pending')
+       
+        ->count();
+        $archivedOrders = Orders::where('status','=','archived')
+       
+        ->count();
+        //dd($payedOrCaders);
+         return view('superVisorDashboard', compact('role','archivedOrders','nonPayedOrders',
+         'allOrders','payedOrders','isWaiter'));
+       // return view('superVisorDashboard', compact('role','isWaiter'));
     }
 }
