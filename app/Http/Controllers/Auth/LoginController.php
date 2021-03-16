@@ -45,8 +45,8 @@ class LoginController extends Controller
     $this->redirectTo = '/managerHome';
         return $this->redirectTo;
 }
-     if(in_array('SuperVisor',$userRoles)){
-    $this->redirectTo = '/superVisorHome';
+     if(in_array('Supervisor',$userRoles)){
+    $this->redirectTo = '/supervisorHome';
         return $this->redirectTo;
 }
      if(in_array('Cashier',$userRoles)){

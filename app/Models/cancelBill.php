@@ -5,25 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\user;
-use App\Models\Orders;
-class CancelOrder extends Model
+use App\Models\Bills;
+class cancelBill extends Model
 {
     use HasFactory;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $table = 'cancel_order';
     protected $fillable = [
         'userId',
         'reason',
-        'orderId',
+        'billId',
     ];
-    public function order()
+    public function bill()
     {
-        return $this->belongsTo(Orders::class,'orderId','id');
+        return $this->belongsTo(Bills::class,'billId','id');
     }
 
     public function user()

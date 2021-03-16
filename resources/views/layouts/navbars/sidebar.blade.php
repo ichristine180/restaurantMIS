@@ -43,6 +43,30 @@
             <p>{{ __('Employees Management') }}</p>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="true">
+        <i class="material-icons">money</i>
+          <p>{{ __(' Report') }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse hide" id="report">
+          <ul class="nav">
+          <li class="nav-item {{ ($activePage == 'Bills') ? ' active' : '' }}">
+          <a class="nav-link" href="{{ route('bills.billsList') }}">
+          <i class="material-icons">free_breakfast</i>
+            <p>{{ __('Bills') }}</p>
+        </a>
+        </li>
+        <li class="nav-item {{ ($activePage == '') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('orders') }}">
+          <i class="material-icons">free_breakfast</i>
+            <p>{{ __('orders') }}</p>
+        </a>
+        </li>
+          </ul>
+        </div>
+      </li>
       @endif
       @if($role === 'Waiter')
       <li class="nav-item{{ $activePage == 'tables' ? ' active' : '' }}">
@@ -52,12 +76,42 @@
         </a>
       </li>
       @endif
-      @if($role === 'Waiter'||'Supervisor'||'Cashier')
-      <li class="nav-item{{ $activePage == 'orders' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('orders') }}">
-          <i class="material-icons">information</i>
-            <p>{{ __('Orders') }}</p>
+      @if($role === 'Supervisor')
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
+        <i class="material-icons">money</i>
+          <p>{{ __(' Report') }}
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse hide" id="laravelExample">
+          <ul class="nav">
+          <li class="nav-item {{ ($activePage == '') ? ' active' : '' }}">
+          <a class="nav-link" href="{{ route('printOrdersCanceled') }}" target="_blank">
+          <i class="material-icons">info</i>
+            <p>{{ __('Canceled Orders') }}</p>
+        </a>
+        </li>
+        <li class="nav-item {{ ($activePage == '') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('printCanceled') }}" target="_blank">
+          <i class="material-icons">info</i>
+            <p>{{ __('Canceled Bills') }}</p>
+        </a>
+        </li>
+        <li class="nav-item {{ ($activePage == '') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('bills.billsList') }}">
+          <i class="material-icons">free_breakfast</i>
+            <p>{{ __('All Bills') }}</p>
+        </a>
+        </li>
+        <li class="nav-item {{ ($activePage == '') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('bills.billsList') }}">
+          <i class="material-icons">free_breakfast</i>
+            <p>{{ __('All orders') }}</p>
+        </a>
+        </li>
+          </ul>
+        </div>
       </li>
       @endif
       @if($isWaiter)
@@ -69,13 +123,38 @@
       </li>
       @endif
       @if($role == 'Cashier')
-      <li class="nav-item{{ $activePage == 'Bills' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('bills') }}">
-          <i class="material-icons">money</i>
-            <p>{{ __('Bills') }}</p>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
+        <i class="material-icons">money</i>
+          <p>{{ __(' Bills') }}
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse hide" id="laravelExample">
+          <ul class="nav">
+          <li class="nav-item {{ ($activePage == 'Bills') ? ' active' : '' }}">
+          <a class="nav-link" href="{{ route('bills') }}">
+          <i class="material-icons">free_breakfast</i>
+            <p>{{ __('Paid Bills') }}</p>
+        </a>
+        </li>
+        <li class="nav-item {{ ($activePage == '') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('canceled') }}">
+          <i class="material-icons">free_breakfast</i>
+            <p>{{ __('Canceled Bills') }}</p>
+        </a>
+        </li>
+        <li class="nav-item {{ ($activePage == '') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('bills.billsList') }}">
+          <i class="material-icons">free_breakfast</i>
+            <p>{{ __('All Bills') }}</p>
+        </a>
+        </li>
+          </ul>
+        </div>
       </li>
       @endif
+     
     </ul>
   </div>
 </div>

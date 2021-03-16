@@ -98,3 +98,14 @@ Route::get('/bills/all','App\Http\Controllers\BillController@all')->name('bills.
 Route::get('/bills/printAll','App\Http\Controllers\BillController@printAll')->name('printAll')->middleware('cashier');
 
 Route::get('/orders/supervisor/nonPayed','App\Http\Controllers\SuperVisorController@nonPayed')->name('orders.supervisor.nonPayed')->middleware('auth');
+Route::get('/cancel/{id}','App\Http\Controllers\BillController@cancel')->name('cancel')->middleware('cashier');
+Route::post('/biil/postCancel/{id}','App\Http\Controllers\BillController@postCancel')->name('postCancel')->middleware('cashier');
+Route::get('/canceled','App\Http\Controllers\BillController@canceled')->name('canceled')->middleware('auth');
+Route::get('/canceledList','App\Http\Controllers\BillController@canceledList')->name('canceledList')->middleware('auth');
+Route::get('/bills/printCanceled','App\Http\Controllers\BillController@printCanceled')->name('printCanceled')->middleware('auth');
+
+Route::get('/cancelOrder/{id}','App\Http\Controllers\SuperVisorController@cancelOrder')->name('cancelOrder')->middleware('supervisor');
+Route::post('/postCancel/{id}','App\Http\Controllers\SuperVisorController@postCancel')->name('orders.postCancel')->middleware('supervisor');
+Route::get('/orders/canceled','App\Http\Controllers\SuperVisorController@canceled')->name('orders.canceled')->middleware('auth');
+Route::get('/orders/canceledList','App\Http\Controllers\SuperVisorController@canceledList')->name('orders.canceledList')->middleware('auth');
+Route::get('/orders/SuperVisorController','App\Http\Controllers\SuperVisorController@printCanceled')->name('printOrdersCanceled')->middleware('auth');
