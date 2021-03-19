@@ -194,7 +194,12 @@ public function printAll(){
       $pdf->getDomPDF()->set_option("enable_php", true);
        return $pdf->stream('bills.pdf',array('Attachment'=>0));
 }
-
+public function printAllOrders(){
+    $data = Orders::get();
+    $pdf = PDF::loadView('orders.pdf.all', compact('data'));
+    $pdf->getDomPDF()->set_option("enable_php", true);
+     return $pdf->stream('orders.pdf',array('Attachment'=>0));
+}
 public function cancel($id){
 $bill = Bills::find($id);
 $user = new User();

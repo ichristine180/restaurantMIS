@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\User;
 use App\Models\Orders;
+use App\Models\Bills;
+use App\Item;
 class HomeController extends Controller
 {
     /**
@@ -26,7 +28,11 @@ class HomeController extends Controller
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
         $isWaiter = $user->hasWaiter(Auth::User()->role);
-        return view('dashboard', compact('role','isWaiter'));
+        $product = Item::get()->count();
+        $users = User::get()->count();
+        $orders = Orders::get()->count();
+        $bills = Bills::get()->count();
+        return view('dashboard', compact('role','isWaiter','bills','users','orders','product'));
     }
     public function waiterHome()
     {
@@ -74,7 +80,11 @@ class HomeController extends Controller
         $user = new User();
         $role = $user->userRole(Auth::User()->role);
         $isWaiter = $user->hasWaiter(Auth::User()->role);
-        return view('Managerdashboard', compact('role','isWaiter'));
+        $product = Item::get()->count();
+        $users = User::get()->count();
+        $orders = Orders::get()->count();
+        $bills = Bills::get()->count();
+        return view('Managerdashboard', compact('role','isWaiter','bills','users','orders','product'));
     }
     public function supervisorHome()
     {

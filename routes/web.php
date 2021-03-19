@@ -95,8 +95,8 @@ Route::get('/bills/archived','App\Http\Controllers\BillController@archived')->na
 Route::get('/bills/billsList','App\Http\Controllers\BillController@billsList')->name('bills.billsList')->middleware('cashier');
 Route::get('/bills/archivedList','App\Http\Controllers\BillController@archivedList')->name('bills.archivedList')->middleware('cashier');
 Route::get('/bills/all','App\Http\Controllers\BillController@all')->name('bills.all')->middleware('cashier');
-Route::get('/bills/printAll','App\Http\Controllers\BillController@printAll')->name('printAll')->middleware('cashier');
-
+Route::get('/bills/printAll','App\Http\Controllers\BillController@printAll')->name('printAll')->middleware('auth');
+Route::get('/printAllOrders','App\Http\Controllers\BillController@printAllOrders')->name('printAllOrders')->middleware('auth');
 Route::get('/orders/supervisor/nonPayed','App\Http\Controllers\SuperVisorController@nonPayed')->name('orders.supervisor.nonPayed')->middleware('auth');
 Route::get('/cancel/{id}','App\Http\Controllers\BillController@cancel')->name('cancel')->middleware('cashier');
 Route::post('/biil/postCancel/{id}','App\Http\Controllers\BillController@postCancel')->name('postCancel')->middleware('cashier');

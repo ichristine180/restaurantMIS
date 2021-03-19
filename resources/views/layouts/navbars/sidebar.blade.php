@@ -53,7 +53,7 @@
         <div class="collapse hide" id="report">
           <ul class="nav">
           <li class="nav-item {{ ($activePage == 'Bills') ? ' active' : '' }}">
-          <a class="nav-link" href="{{ route('bills.billsList') }}">
+          <a class="nav-link" href="/bills/printAll" target="_blank">
           <i class="material-icons">free_breakfast</i>
             <p>{{ __('Bills') }}</p>
         </a>

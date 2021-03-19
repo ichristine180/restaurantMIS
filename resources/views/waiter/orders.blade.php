@@ -10,6 +10,11 @@
             <div class="card">
             <div class="row">
             <a href="{{ route('waiterHome') }}" class="btn btn-sm btn-success" style="margin-left:20px;"> Back To Dashboard</a>
+            @if($role === 'Managing Director' || $role === 'Manager' )
+            <a href="{{ route('printAllOrders') }}" class="btn btn-sm btn-danger" target="_blank" style="margin-left:20px;">
+      
+            <i class="material-icons">local_printshop</i>Print</a>
+            @endif
             </div>
                 <div class="card-header bg-info text-white" style="margin-bottom: 10px; ">ORDERS LIST
 
